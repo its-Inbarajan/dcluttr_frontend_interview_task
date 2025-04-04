@@ -44,7 +44,7 @@ const frameworks = [
 
 export function ComboboxDemo() {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = React.useState("NJ");
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -58,13 +58,13 @@ export function ComboboxDemo() {
           >
             <div className="bg-[#309E96] w-7 h-7 flex items-center justify-center rounded-[7px]">
               {value && (
-                <p className="text-white font-medium text-center -mt-1 text-sm p-[5px] tracking-wide leading-1.5">
-                  {value.slice(0, 2).toLocaleUpperCase()}
+                <p className="text-white font-medium text-center -mt-0.5 text-xs p-[5px] tracking-wide leading-1.5">
+                  {value.slice(0, 2).toLocaleUpperCase() ?? "HI"}
                 </p>
               )}
             </div>
-            {frameworks[0].label}
-            <ChevronsUpDown className="text-black" />
+            {frameworks[0].label ?? "HI"}
+            <ChevronsUpDown className="text-black size-5 inline-block" />
           </Button>
           <ChevronsLeft className="size-5 text-[#309E96]" />
         </div>
