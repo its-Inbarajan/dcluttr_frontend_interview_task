@@ -13,12 +13,15 @@ import { Cell } from "recharts";
 import {
   Card,
   CardContent,
+  CardFooter,
   //   CardDescription,
   //   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card/card";
-// import Image from "next/image";
+import { CircleHelp } from "lucide-react";
+import Loader from "@/components/ui/loader/loader";
+
 type GridProps = {
   x?: number;
   y?: number;
@@ -48,8 +51,8 @@ const DynamicChartCard: FC<ChartCardProps> = ({
   gridProps,
   id,
   title,
-  description,
-  logo,
+  //   description,
+  //   logo,
 }) => {
   const widgetRef = useRef<HTMLDivElement | null>(null);
 
@@ -68,7 +71,7 @@ const DynamicChartCard: FC<ChartCardProps> = ({
     }
   }, [gridProps, id]);
 
-  const [chartData, setChartData] = useState<any[]>([]);
+  const [chartData, setChartData] = useState<unknown[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -86,7 +89,7 @@ const DynamicChartCard: FC<ChartCardProps> = ({
 
         if (result.data) {
           // Convert Cube.js response to chart format
-          const formattedData = result.data.map((item: any) => ({
+          const formattedData = result.data.map((item: never) => ({
             date: item["blinkit_insights_sku.created_at"],
             value: item["blinkit_insights_sku.sales_mrp_sum"],
           }));
@@ -151,25 +154,43 @@ const DynamicChartCard: FC<ChartCardProps> = ({
   }
 
   if (loading) {
-    return <div className="flex items-center justify-center">Loading...</div>;
+    return <Loader />;
   }
 
   return (
     <div className="grid-stack-item col-span-4" ref={widgetRef}>
-      <Card className="rounded-2xl shadow-md h-full ">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0">
-          <div className="flex items-center gap-2">
-            {/* {logo && <Image src={logo} alt="logo" width={20} height={20} />} */}
-            <CardTitle className="text-lg font-semibold">{title}</CardTitle>
-          </div>
-        </CardHeader>
-        <CardContent className="pt-4">
-          {/* {description && (
-            <p className="text-sm mb-2 text-muted-foreground">{description}</p>
-          )} */}
-          {renderChart()}
-        </CardContent>
-      </Card>
+      <div className="">
+        <Card className="rounded-xl bg-white">
+          <CardHeader className="p-2 w-full flex flex-row justify-between items-center border-b">
+            <CardTitle className="font-medium leading-6 tracking-wide text-sm text-gray-600">
+              {title}
+            </CardTitle>
+
+            <div className="flex items-center">
+              <CircleHelp className="size-5 text-black" />
+            </div>
+          </CardHeader>
+          <CardContent className="overflow-visible p-2">
+            <div className="flex items-center justify-center">
+              {renderChart()}
+            </div>
+          </CardContent>
+          <CardFooter className="flex border-t px-4 py-2 gap-5 items-center">
+            <div className="flex items-center justify-between gap-1.5">
+              <div className="w-1.5 h-1.5 bg-green-500 rounded-full" />
+              <p className="text-sm font-sans text-gray-500 leading-6 tracking-wide">
+                This Month
+              </p>
+            </div>
+            <div className="flex items-center justify-start gap-1.5">
+              <div className="w-1.5 h-1.5 bg-red-500 rounded-full" />
+              <p className="text-sm font-sans text-gray-500 leading-6 tracking-wide">
+                Last Month
+              </p>
+            </div>
+          </CardFooter>
+        </Card>
+      </div>
     </div>
   );
 };
