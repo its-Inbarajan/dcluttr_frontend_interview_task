@@ -10,15 +10,12 @@ export default async function handler(
     return res.status(405).json({ message: "Only POST requests allowed" });
   }
 
-  const cubeApiUrl =
-    "https://amaranth-muskox.aws-us-east-1.cubecloudapp.dev/dev-mode/feat/frontend-hiring-task/cubejs-api/v1/load";
-
   try {
-    const cubeResponse = await fetch(cubeApiUrl, {
+    const cubeResponse = await fetch(process.env.CUBE_API_URL as string, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJicmFuZElkIjoiNDkiLCJleHAiOjE3NDM0OTYyMTIsImlzcyI6ImN1YmVjbG91ZCJ9.luqfkt0CQW_B01j5oAvl_8hicbFzPmyLXfvEZYJbej4`,
+        Authorization: `Bearer ${process.env.CUBE_API_TOKEN as string}`,
       },
       body: JSON.stringify(req.body),
     });
