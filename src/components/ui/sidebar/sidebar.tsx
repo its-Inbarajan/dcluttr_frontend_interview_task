@@ -1,49 +1,6 @@
 "use client";
-// import Image from "next/image";
-// import React from "react";
-// import perfora from "../../../../public/images/perfora.png";
-// import mama from "../../../../public/images/mama.png";
-// import boat from "../../../../public/images/boat.png";
-// import { ComboboxDemo } from "../combobox/combobox";
-// import { Plus } from "lucide-react";
+
 import { Button } from "@/components/ui/button/button";
-// const Sidebar = () => {
-//   return (
-//     <aside className="flex bg-[#FFFFFF] items-center gap-5">
-//       <div className="inline-block relative w-auto">
-//         <div className="flex items-center gap-3">
-//           <Image src={perfora} className="w-12" alt="Logo" />
-//           <ComboboxDemo />
-//         </div>
-//         <div className="flex gap-10">
-//           <div className="flex items-start flex-col gap-5 md:mt-8 mt-4">
-//             <Image
-//               src={mama}
-//               className="w-12 rounded-2xl shadow hover:shadow-md transition-all ease-linear shadow-gray-500"
-//               alt="Logo"
-//             />
-//             <Image
-//               src={boat}
-//               className="w-12 rounded-2xl shadow hover:shadow-md transition-all ease-linear shadow-gray-500"
-//               alt="Logo"
-//             />
-//             <Button
-//               variant={"default"}
-//               className="h-12 w-12 flex items-center bg-transparent ring-1 ring-gray-400 group rounded-lg justify-center"
-//             >
-//               <Plus className="size-5 text-[#1D874F] group-hover:text-white" />
-//             </Button>
-//           </div>
-//           <div className="flex h-svh bg-gray-500"></div>
-//         </div>
-//       </div>
-//     </aside>
-//   );
-// };
-
-// export default Sidebar;
-// const [state, setState] = useState("collapsed");
-
 import { cn } from "@/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
 import { PanelLeft } from "lucide-react";
